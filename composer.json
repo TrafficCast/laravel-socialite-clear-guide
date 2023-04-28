@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "trafficcast/laravel-socialite-clear-guide",
+    "description": "This package is a custom Socialite driver for Iteris Clear Guide.",
     "keywords": [
-        ":vendor_name",
+        "TrafficCast",
         "laravel",
-        ":package_slug"
+        "laravel-socialite-clear-guide"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/trafficcast/laravel-socialite-clear-guide",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Steve Williamson",
+            "email": "sxwilliamson@iteris.com",
             "role": "Developer"
         }
     ],
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "TrafficCast\\SocialiteClearGuide\\": "src/",
+            "TrafficCast\\SocialiteClearGuide\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "TrafficCast\\SocialiteClearGuide\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -61,10 +61,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "TrafficCast\\SocialiteClearGuide\\SocialiteClearGuideServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "SocialiteClearGuide": "TrafficCast\\SocialiteClearGuide\\Facades\\SocialiteClearGuide"
             }
         }
     },
