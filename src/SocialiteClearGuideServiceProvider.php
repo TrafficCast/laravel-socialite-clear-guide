@@ -5,7 +5,6 @@ namespace TrafficCast\SocialiteClearGuide;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Socialite\Contracts\Factory;
-use TrafficCast\SocialiteClearGuide\SocialiteClearGuideProvider;
 
 class SocialiteClearGuideServiceProvider extends ServiceProvider
 {

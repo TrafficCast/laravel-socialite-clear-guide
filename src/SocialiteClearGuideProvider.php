@@ -2,9 +2,9 @@
 
 namespace TrafficCast\SocialiteClearGuide;
 
-use Laravel\Socialite\Two\User;
 use GuzzleHttp\Exception\GuzzleException;
 use Laravel\Socialite\Two\AbstractProvider;
+use Laravel\Socialite\Two\User;
 
 class SocialiteClearGuideProvider extends AbstractProvider
 {
@@ -23,17 +23,16 @@ class SocialiteClearGuideProvider extends AbstractProvider
      */
     public function getClearGuideUrl()
     {
-        return config('services.clear-guide.base_uri') . '/api';
+        return config('services.clear-guide.base_uri').'/api';
     }
 
     /**
-     * @param string $state
-     *
+     * @param  string  $state
      * @return string
      */
     protected function getAuthUrl($state)
     {
-        return $this->buildAuthUrlFromBase($this->getClearGuideUrl() . '/token', $state);
+        return $this->buildAuthUrlFromBase($this->getClearGuideUrl().'/token', $state);
     }
 
     /**
@@ -41,22 +40,21 @@ class SocialiteClearGuideProvider extends AbstractProvider
      */
     protected function getTokenUrl()
     {
-        return $this->getClearGuideUrl() . '/token';
+        return $this->getClearGuideUrl().'/token';
     }
 
     /**
-     * @param string $token
+     * @param  string  $token
+     * @return array|mixed
      *
      * @throws GuzzleException
-     *
-     * @return array|mixed
      */
     protected function getUserByToken($token)
     {
-        $response = $this->getHttpClient()->post($this->getClearGuideUrl() . '/o/userinfo/', [
+        $response = $this->getHttpClient()->post($this->getClearGuideUrl().'/o/userinfo/', [
             'headers' => [
                 'cache-control' => 'no-cache',
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer '.$token,
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ],
         ]);
@@ -72,12 +70,11 @@ class SocialiteClearGuideProvider extends AbstractProvider
         return (new User())->setRaw($user)->map([
             'id' => $user['sub'],
             'email' => $user['email'],
-            'name' => $user['first_name']." ".$user['last_name'],
+            'name' => $user['first_name'].' '.$user['last_name'],
             'is_staff' => $user['is_staff'],
             'is_superuser' => $user['is_superuser'],
             'organization' => $user['organization'],
             'user_profile' => $user['user_profile'],
         ]);
     }
-
 }
