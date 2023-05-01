@@ -2,11 +2,12 @@
 
 namespace TrafficCast\SocialiteClearGuide;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
-use TrafficCast\SocialiteClearGuide\Commands\SocialiteClearGuideCommand;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\ServiceProvider;
+use Laravel\Socialite\Contracts\Factory;
+use TrafficCast\SocialiteClearGuide\SocialiteClearGuideProvider;
 
-class SocialiteClearGuideServiceProvider extends PackageServiceProvider
+class SocialiteClearGuideServiceProvider extends ServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +17,20 @@ class SocialiteClearGuideServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-socialite-clear-guide')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-socialite-clear-guide_table')
-            ->hasCommand(SocialiteClearGuideCommand::class);
+            ->name('laravel-socialite-clear-guide');
+    }
+
+    /**
+     * @throws BindingResolutionException
+     */
+    public function boot()
+    {
+        $socialite = $this->app->make(Factory::class);
+
+        $socialite->extend('clear-guide', function () use ($socialite) {
+            $config = config('services.clear-guide');
+
+            return $socialite->buildProvider(SocialiteClearGuideProvider::class, $config);
+        });
     }
 }
