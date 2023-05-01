@@ -6,7 +6,6 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Socialite\Contracts\Factory;
 use Spatie\LaravelPackageTools\Package;
-use TrafficCast\SocialiteClearGuide\SocialiteClearGuideProvider;
 
 class SocialiteClearGuideServiceProvider extends ServiceProvider
 {
