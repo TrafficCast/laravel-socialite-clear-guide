@@ -1,7 +1,7 @@
 # This package is a custom Socialite driver for Iteris Clear Guide.
 
 [![GitHub Tests Action Status](https://github.com/TrafficCast/laravel-socialite-clear-guide/actions/workflows/run-tests.yml/badge.svg?branch=main&label=tests&style=flat-square)](https://github.com/trafficcast/laravel-socialite-clear-guide/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/trafficcast/laravel-socialite-clear-guide/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/trafficcast/laravel-socialite-clear-guide/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![GitHub Code Style Action Status](https://github.com/TrafficCast/laravel-socialite-clear-guide/actions/workflows/fix-php-code-style-issues.yml/badge.svg?branch=main&label=tests&style=flat-square)](https://github.com/trafficcast/laravel-socialite-clear-guide/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 
 OAuth2 Authentication with Iteris Clear Guide
 
