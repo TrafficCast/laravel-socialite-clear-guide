@@ -28,6 +28,18 @@ Once you install the package, add the next config values in you config/services.
 
 You can use the driver as you would use it in the Laravel Socialite's official [documentation](https://laravel.com/docs/10.x/socialite#main-content). Use `clear-guide` keyword when you want to instantiate the driver:
 
+Example Login Route:
+
+```php
+use Laravel\Socialite\Facades\Socialite;
+...
+Route::get('/auth/clear-guide', function () {
+    return Socialite::driver('clear-guide')->redirect();
+})->name('auth.clear-guide');
+```
+
+Example callback to get logged in user info
+
 ```php
 $user = Socialite::driver('clear-guide')->user();
 ```

@@ -11,28 +11,21 @@ class SocialiteClearGuideProvider extends AbstractProvider
     /**
      * @var string[]
      */
-    protected $scopes = [];
+    protected $scopes = ['openid'];
 
     /**
-     * @var string
+     * Indicates if PKCE should be used.
+     *
+     * @var bool
      */
-    protected $scopeSeparator = ' ';
+    protected $usesPKCE = true;
 
     /**
      * @return string
      */
-    public function getClearGuideUrl()
+    public function getAuthUrl($state)
     {
-        return config('services.clear-guide.base_uri').'/api';
-    }
-
-    /**
-     * @param  string  $state
-     * @return string
-     */
-    protected function getAuthUrl($state)
-    {
-        return $this->buildAuthUrlFromBase($this->getClearGuideUrl().'/token', $state);
+        return $this->buildAuthUrlFromBase(config('services.clear-guide.base_uri').'/o/authorize/', $state);
     }
 
     /**
@@ -40,7 +33,7 @@ class SocialiteClearGuideProvider extends AbstractProvider
      */
     protected function getTokenUrl()
     {
-        return $this->getClearGuideUrl().'/token';
+        return config('services.clear-guide.base_uri').'/o/token/';
     }
 
     /**
@@ -51,7 +44,9 @@ class SocialiteClearGuideProvider extends AbstractProvider
      */
     protected function getUserByToken($token)
     {
-        $response = $this->getHttpClient()->post($this->getClearGuideUrl().'/o/userinfo/', [
+        $userUrl = config('services.clear-guide.base_uri').'/o/userinfo/';
+
+        $response = $this->getHttpClient()->get($userUrl, [
             'headers' => [
                 'cache-control' => 'no-cache',
                 'Authorization' => 'Bearer '.$token,
@@ -59,7 +54,7 @@ class SocialiteClearGuideProvider extends AbstractProvider
             ],
         ]);
 
-        return json_decode($response->getBody()->getContents(), true);
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -70,8 +65,7 @@ class SocialiteClearGuideProvider extends AbstractProvider
         return (new User())->setRaw($user)->map([
             'id' => $user['sub'],
             'email' => $user['email'],
-            'first_name' => $user['first_name'],
-            'last_name' => $user['last_name'],
+            'name' => $user['first_name'].' '.$user['last_name'],
             'is_staff' => $user['is_staff'],
             'is_superuser' => $user['is_superuser'],
             'organization' => $user['organization'],
